@@ -1,1 +1,10 @@
-<p>sign-up works!</p>
+<h1>Sign up</h1>
+<label for="username">Username</label>
+<input id="username" />
+<label for="email">E-mail</label>
+<input id="email" />
+<label for="password">Password</label>
+<input id="password" type="password" (input)="onChangePassword($event)" />
+<label for="passwordRepeat">Password Repeat</label>
+<input id="passwordRepeat" type="password" (input)="onChangePasswordRepeat($event)" />
+<button [disabled]="isDisabled()">Sign up</button>

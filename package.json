@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:jest": "jest --watch" 
+    "test:jest": "jest --watch"
   },
   "private": true,
   "dependencies": {
@@ -44,15 +44,15 @@
     "typescript": "~5.3.2",
     "whatwg-fetch": "^3.6.20"
   },
-  "jest":{
+  "jest": {
     "preset": "jest-preset-angular",
-    "setupFilesAfterEnv":[
+    "setupFilesAfterEnv": [
       "<rootDir>/setup-jest.ts"
     ],
-    "transform":{
+    "transform": {
       "^.+\\.(ts|js|html)$": "jest-preset-angular"
     },
-    "testMatch":[
+    "testMatch": [
       "**/>(*.)+(jest).ts"
     ],
     "testEnvironment": "jsdom"

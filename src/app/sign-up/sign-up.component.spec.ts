@@ -8,16 +8,101 @@ describe('SignUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SignUpComponent]
-    })
-    .compileComponents();
-    
+      imports: [SignUpComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SignUpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Layout', () => {
+    it('has Sign Up header', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const h1 = signUp.querySelector('h1');
+      expect(h1?.textContent).toBe('Sign up');
+    });
+
+    it('has username input', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const label = signUp.querySelector('label[for="username"]');
+      const input = signUp.querySelector('input[id="username"]');
+      expect(input).toBeTruthy();
+      expect(label).toBeTruthy();
+      expect(label?.textContent).toContain('Username');
+    });
+
+    it('has email input', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const label = signUp.querySelector('label[for="email"]');
+      const input = signUp.querySelector('input[id="email"]');
+      expect(input).toBeTruthy();
+      expect(label).toBeTruthy();
+      expect(label?.textContent).toContain('E-mail');
+    });
+
+    it('has password input', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const label = signUp.querySelector('label[for="password"]');
+      const input = signUp.querySelector('input[id="password"]');
+      expect(input).toBeTruthy();
+      expect(label).toBeTruthy();
+      expect(label?.textContent).toContain('Password');
+    });
+
+    it('has Password type for password input', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const input = signUp.querySelector(
+        'input[id="password"]'
+      ) as HTMLInputElement;
+      expect(input.type).toBe('password');
+    });
+
+    it('has password repeat input', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const label = signUp.querySelector('label[for="passwordRepeat"]');
+      const input = signUp.querySelector('input[id="passwordRepeat"]');
+      expect(input).toBeTruthy();
+      expect(label).toBeTruthy();
+      expect(label?.textContent).toContain('Password Repeat');
+    });
+
+    it('has Password type for password repeat input', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const input = signUp.querySelector(
+        'input[id="passwordRepeat"]'
+      ) as HTMLInputElement;
+      expect(input.type).toBe('password');
+    });
+
+    it('has Sign Up button', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const button = signUp.querySelector('button');
+      expect(button?.textContent).toBe('Sign up');
+    });
+    it('disables the button initially', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const button = signUp.querySelector('button');
+      expect(button?.disabled).toBeTruthy();
+    });
+  });
+
+  describe('Interactions', () => {
+    it('enables the button when the password and password repeat fields have same value', () => {
+      const signUp = fixture.nativeElement as HTMLElement;
+      const passwordInput = signUp.querySelector(
+        'input[id="password"]'
+      ) as HTMLInputElement;
+      const passwordRepeatInput = signUp.querySelector(
+        'input[id="passwordRepeat"]'
+      ) as HTMLInputElement;
+      passwordInput.value = 'P4ssword';
+      passwordInput.dispatchEvent(new Event('input'));
+      passwordRepeatInput.value = 'P4ssword';
+      passwordRepeatInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      const button = signUp.querySelector('button');
+      expect(button?.disabled).toBeFalsy();
+    });
   });
 });
